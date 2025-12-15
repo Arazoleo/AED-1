@@ -8,15 +8,29 @@ typedef struct arv{
 }No;
 typedef No * parv;
 void Inicializa(parv *raiz){
-  raiz = NULL;
+  *raiz = NULL;
+}
+
+parv AlocaNovoNo(parv no, int n){
+    no = (parv)malloc(sizeof(parv));
+    
+    if(!no){
+        printf("Erro de alocação de memória\n");
+        exit(4);
+    }
+    
+    no->num = n;
+    no->esq = NULL;
+    no->dir = NULL;
+
 }
 
 void Insere(parv *raiz, int num){
+  parv novo = AlocaNovoNo(novo, num);
+  
   if(*raiz == NULL){
-    *raiz = (parv)malloc(sizeof(No));
-    (*raiz)->esq = NULL;
-    (*raiz)->dir = NULL;
-    (*raiz)->num = num;
+    
+    *raiz = novo;
   
   }else{
       if(num < (*raiz)->num){
@@ -104,7 +118,7 @@ int Nos_pares(parv raiz){
 int N_maiores(parv raiz, int x){
   if(raiz){
     int cont = 0;
-    if(raiz->num >= x){
+    if(raiz->num > x){
       cont++;
     }
 
